@@ -4,7 +4,7 @@
 
 FROM centos:centos6
 MAINTAINER Greg Trahair <greg@monkeyswithbuttons.com>
-RUN yum -y install openssh-server
+RUN yum -y install openssh-server openssh-clients
 RUN yum -y install MAKEDEV
 
 # Workaround needed for bad libselinux-ruby deps
@@ -27,5 +27,4 @@ RUN sed -i -e 's/Defaults.*requiretty/#&/' /etc/sudoers
 RUN sed -i -e 's/\(UsePAM \)yes/\1 no/' /etc/ssh/sshd_config
 
 # We need openssh clients to enable file transfer over scp
-RUN yum -y install openssh-clients
 CMD ["/usr/sbin/sshd", "-D"]
